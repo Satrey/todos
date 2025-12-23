@@ -1,30 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <current-time class="col-2"/>
+    <task-input class="col-6" @add-task="addNewTask"/>
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import CurrentTime from './components/CurrentTime.vue';
+import TaskInput from './components/TaskInput.vue';
 
-nav {
-  padding: 30px;
+export default {
+  name: 'app',
+  components: {
+    CurrentTime,
+    TaskInput,
+  },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  methods: {
+    addNewTask(task){
+      alert(`Новая задача добавлена ${task}`)
     }
-  }
+  },
 }
-</style>
+</script>
