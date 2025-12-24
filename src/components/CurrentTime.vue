@@ -1,5 +1,5 @@
 <template>
-    <div class="cardBox">
+    <div class="cardBox col-6">
         <div class="container">
             <h2>Сегодня :</h2>
             <h3>{{ currentTime }}</h3>

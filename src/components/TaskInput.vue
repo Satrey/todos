@@ -1,9 +1,9 @@
 <template>
-    <div class="cardBox">
+    <div class="cardBox tasker col-6">
         <div class="container">
             <strong>Моя задача :</strong>
             <input type="text" v-model="task" class="taskInput">
-            <button v-on:click="addTask">Добавить задачу</button>
+            <button v-on:click="addTask" class="addButton">Добавить задачу</button>
         </div>
     </div>
 </template>
