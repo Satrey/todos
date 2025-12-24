@@ -4,55 +4,35 @@
     <task-input class="col-6" @add-task="addNewTask"/>
     <div class='col-12'>
       <div class='cardBox col-6'>
-        <div class='container'>
-          <h2>My Tasks</h2>
-
-          <table class="tasksTable">
-            <thead>
-              <th>Номер</th>
-              <th>Открыто</th>
-              <th>Наименование</th>
-              <th>Закрыта</th>
-            </thead>
-            <tbody>
-                <tr v-for='(taskItem, index) in displayList'
-                :key='`${index}_${Math.random()}`'
-                >
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ formateDate(taskItem.createdAt) }}</td>
-                  <td>{{ taskItem.task }}</td>
-                  <td>
-                    <input type='checkbox'
-                    :checked='!!taskItem.finishedAt'
-                    @input='changeStatus(index)'
-                    />
-                    <span v-if='taskItem.finishedAt'> 
-                      {{ formateDate(taskItem.finishedAt) }}
-                    </span>
-                  </td>
-                </tr>
-            </tbody>
-          </table>
-          <!-- <ol class='taskList'>
-            <li
-            v-for='(taskItem, index) in displayList'
-            :key='`${index}_${Math.random()}`'
-            >
-              <hr>
-              {{ formateDate(taskItem.createdAt) }}
-              {{ taskItem.task }}
-              <input type='checkbox'
-              :checked='!!taskItem.finishedAt'
-              @input='changeStatus(index)'
-              />
-              <span v-if='taskItem.finishedAt'>
-                Выполнено : 
-                {{ formateDate(taskItem.finishedAt) }}
-              </span>
-              <hr>
-            </li>
-          </ol> -->
-        </div>
+        <table class="tasksTable">
+          <thead>
+            <th>Номер</th>
+            <th>Открыто</th>
+            <th>Наименование</th>
+            <th></th>
+            <th>Закрыта</th>
+          </thead>
+          <tbody>
+              <tr v-for='(taskItem, index) in displayList'
+              :key='`${index}_${Math.random()}`'
+              >
+                <td>{{ index + 1 }}</td>
+                <td>{{ formateDate(taskItem.createdAt) }}</td>
+                <td>{{ taskItem.task }}</td>
+                <td>
+                  <input type='checkbox'
+                  :checked='!!taskItem.finishedAt'
+                  @input='changeStatus(index)'
+                  />
+                </td>
+                <td>
+                  <span v-if='taskItem.finishedAt'> 
+                    {{ formateDate(taskItem.finishedAt) }}
+                  </span>
+                </td>
+              </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

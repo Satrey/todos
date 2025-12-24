@@ -1,5 +1,5 @@
 <template>
-    <div class="cardBox tasker col-6">
+    <div class="cardBox col-6">
         <div class="container">
             <strong>Моя задача :</strong>
             <input type="text" v-model="task" class="taskInput">
