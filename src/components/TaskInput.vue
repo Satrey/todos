@@ -1,7 +1,7 @@
 <template>
     <div class="cardBox col-6">
-        <div class="container">
-            <strong>Моя задача :</strong>
+        <div class="sorter">
+            <div style="align-content: center;">Моя задача :</div>
             <input type="text" v-model="task" class="taskInput">
             <button v-on:click="addTask" class="addButton">Добавить задачу</button>
         </div>

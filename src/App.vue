@@ -2,8 +2,45 @@
   <div id="app">
     <current-time class="col-2"/>
     <task-input class="col-6" @add-task="addNewTask"/>
+    <div class="cardBox col-6">
+      <div class="sorter">
+          <div>
+            <input
+              v-model="hideDone"
+              type="checkbox"
+              id="hideDone"
+              name="hideDone"
+            />
+            <label for="hideDone">
+              Hide Done Tasks
+            </label>
+          </div>
+          <div>
+            <input
+              v-model="reverse"
+              type="checkbox"
+              id="reverse"
+              name="reverse"
+            />
+            <label for="reverse">
+              Reverse Order
+            </label>
+          </div>
+          <div>
+            <input
+              v-model="sortById"
+              type="checkbox"
+              id="sortById"
+              name="sortById"
+            />
+              <label for="sortById">
+              Sort By Id
+            </label>
+          </div>
+        </div>
+    </div>
     <div class='col-12'>
-      <div class='cardBox col-6'>
+      <div class='cardBox col-6'>        
         <table class="tasksTable">
           <thead>
             <th>Номер</th>
@@ -16,13 +53,13 @@
               <tr v-for='(taskItem, index) in displayList'
               :key='`${index}_${Math.random()}`'
               >
-                <td>{{ index + 1 }}</td>
+                <td>{{ taskItem.id }}</td>
                 <td>{{ formateDate(taskItem.createdAt) }}</td>
                 <td>{{ taskItem.task }}</td>
                 <td>
                   <input type='checkbox'
                   :checked='!!taskItem.finishedAt'
-                  @input='changeStatus(index)'
+                  @input='changeStatus(taskItem.id)'
                   />
                 </td>
                 <td>
@@ -51,12 +88,31 @@ export default {
 
   data: () => ({
     taskList: [],
+    hideDone: false,
+    reverse: false,
+    sortById: false,
   }),
 
   computed: {
+    baseList() {
+      return [...this.taskList].map(
+        (t, index) => ({
+          ...t, id: index +1
+        })
+      );
+    },
+
+    filteredList() {
+      return [...this.baseList].filter(t => !t.finishedAt)
+    },
+
+    sortedList() {
+      return [...this.filteredList].sort((a,b) => b.id - a.id);
+    },
+
     displayList() {
-      return this.taskList;
-    }
+      return this.sortedList;
+    },
   },
 
   methods: {
@@ -88,8 +144,8 @@ export default {
       })
     },
 
-    changeStatus(taskIndex){
-      const task = this.taskList[taskIndex];
+    changeStatus(taskId){
+      const task = this.taskList[taskId - 1];
         if(task.finishedAt){
           task.finishedAt = undefined;
         } else {
